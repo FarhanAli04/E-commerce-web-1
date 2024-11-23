@@ -1,19 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import ProductDetailsPage from './components/ProductDetailsPage';
-import Navbar from './components/Navbar';
+import './App.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement } from './store'
 
-const App = () => {
+function App() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product/:id" element={<ProductDetailsPage />} />
-      </Routes>
-    </Router>
-  );
-};
+    <>
+      <h1>Counter: {count}</h1>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+    </>
+  )
+}
 
-export default App;
+export default App
